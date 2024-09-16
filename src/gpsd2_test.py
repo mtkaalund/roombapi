@@ -4,7 +4,11 @@ import gpsd2
 gpsd2.connect()
 
 device = gpsd2.device()
-print(device)
+#print(device)
+print("Device:")
+print("\tpath:", device["path"])
+print("\tspeed:", device["speed"])
+print("\tdriver:", device["driver"])
 
 try:
     # Get GPS position
