@@ -18,3 +18,9 @@ To deactivate the enviroment
 ## Projects used in this project
 [py-gpsd2](https://github.com/hatsunearu/py-gpsd2)
 [RPLCD](https://pypi.org/project/RPLCD/)
+
+## Other resources
+[medium.com how to set up a RPI4 with LCD](https://medium.com/@thedyslexiccoder/how-to-set-up-a-raspberry-pi-4-with-lcd-display-using-i2c-backpack-189a0760ae15)
+[RPLCD RTD.io](https://rplcd.readthedocs.io/en/stable/getting_started.html)
+[GPSD austinsnerdythings.com](https://austinsnerdythings.com/2021/04/19/microsecond-accurate-ntp-with-a-raspberry-pi-and-pps-gps/)
+[RPI GPS satsignal](https://www.satsignal.eu/ntp/Raspberry-Pi-quickstart.html)
