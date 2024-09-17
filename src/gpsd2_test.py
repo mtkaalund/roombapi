@@ -44,14 +44,14 @@ try:
         print("\tSpeed:", packet.speed())
         print("\tPosition Precision:", packet.position_precision())
 #        print("\t\tTime UTC:", packet.time_utc())
-        print("\t\tTime Local:", packet.time_local())
+#        print("\t\tTime Local:", packet.time_local())
         print("\t\tMap URL:", packet.map_url())
     else:
         print("\tLocation: Not Available")
         print("\tSpeed: Not Available")
         print("\tPosition Precision: Not Available")
  #       print("\t\tTime UTC: Not Available")
-        print("\t\tTime Local: Not Available")
+#        print("\t\tTime Local: Not Available")
         print("\t\tMap URL: Not Available")
 
     if packet.mode >= 3:
