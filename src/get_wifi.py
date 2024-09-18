@@ -52,8 +52,8 @@ if __name__ == "__main__":
     printer.daemon = True
     printer.start()
     # start the channel changer
-    channel_changer = Thread(target=change_channel)
-    channel_changer.daemon = True
-    channel_changer.start()
+    # channel_changer = Thread(target=change_channel)
+    # channel_changer.daemon = True
+    # channel_changer.start()
     # start sniffing
     sniff(prn=callback, iface=interface)
