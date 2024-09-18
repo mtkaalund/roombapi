@@ -1,6 +1,10 @@
 # roombapi
 Roomba PI, for controlling my ROOBA with a Raspberry PI Zero 2
 
+Remember to add user to ```dialout```.
+
+```sudo adduser ${USER} dialout```
+
 ## Create a python vent
 First clone the project then in the project folder use the following command
 ```python3 -m vent env```
