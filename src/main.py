@@ -2,12 +2,14 @@ from RPLCD.i2c import CharLCD
 import gpsd2
 import time
 
+# initialize
 lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=20, rows=4, dotsize=8)
 lcd.clear() # Clear the display :)
 
 gpsd2.connect() # Connect to the local gpsd
 device = gpsd2.device()
 
+# Startup messages
 lcd.write_string("Welcome to RoombaPI\n\r")
 lcd.write_string("Created by MTK")
 
@@ -24,6 +26,8 @@ lcd.write_string(speed_str)
 
 driver_str = f"Driver: {device['driver']}\n\r"
 lcd.write_string(driver_str)
+
+time.sleep(3)
 
 #if __name__ == "__main__":
     
