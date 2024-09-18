@@ -16,13 +16,13 @@ time.sleep(3)
 lcd.clear()
 lcd.write_string("GPS Device:\n\r")
 
-path_str = f"Path: {device["path"]}\n\r"
+path_str = f"Path: {device['path']}\n\r"
 lcd.write_string(path_str)
 
-speed_str = f"Speed: {device["speed"]}\n\r"
+speed_str = f"Speed: {device['speed']}\n\r"
 lcd.write_string(speed_str)
 
-driver_str = f"Driver: {device["driver"]}\n\r"
+driver_str = f"Driver: {device['driver']}\n\r"
 lcd.write_string(driver_str)
 
 #if __name__ == "__main__":
