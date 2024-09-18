@@ -1,3 +1,5 @@
 RPLCD
 py-gpsd2
 smbus2
+scapy
+pandas
