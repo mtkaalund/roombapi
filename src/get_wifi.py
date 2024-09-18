@@ -27,11 +27,13 @@ def callback(packet):
         crypto = stats.get("crypto")
         networks.loc[bssid] = (ssid, dbm_signal, channel, crypto)
 
+
 def print_all():
     while True:
         os.system("clear")
         print(networks)
         time.sleep(0.5)
+
 
 def change_channel():
     ch = 1
@@ -41,6 +43,7 @@ def change_channel():
         ch = ch % 14 + 1
         time.sleep(0.5)
 
+
 if __name__ == "__main__":
     # interface name, check using iwconfig
     interface = "wlan0"
@@ -48,9 +51,9 @@ if __name__ == "__main__":
     printer = Thread(target=print_all)
     printer.daemon = True
     printer.start()
-    # start sniffing
-    sniff(prn=callback, iface=interface)
     # start the channel changer
     channel_changer = Thread(target=change_channel)
     channel_changer.daemon = True
     channel_changer.start()
+    # start sniffing
+    sniff(prn=callback, iface=interface)
