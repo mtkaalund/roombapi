@@ -14,7 +14,7 @@ def signal_handler(signal, frame):
 	sys.exit(1)
 
 def signal_exit(signal, frame):
-	print "Signal exit"
+	print("Signal exit")
 	sys.exit(1)
 
 def usage():
