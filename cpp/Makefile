@@ -1,19 +1,20 @@
 SOURCES := $(wildcard *.cpp)
-OBJECTS := $(SOURCES:%.cpp=%.o)
-DEPS    := $(OBJECTS:.o=.d)
+OBJECTS := $(SOURCES:%.cpp=objs/%.o)
+DEPS    := $(OBJECTS:objs/%.o=%.d)
 INCLUDES:= -I.
-CXXFLAGS:= -std=c++20 -Wall -pedantic
-LDFLAGS := -lgps -lstdc++fs -lpthread
+CXXFLAGS:= -std=c++20 -Wall -pedantic -pthread -O0 -g3 -Wextra
+LDFLAGS := -lgps -lstdc++fs -lpthread -L/usr/lib
 TARGETS := gpsd-example
 
-all: $(TARGETS)
-	@echo $(TARGETS)
+.PHONY: clean all
 
-%.o: %.cpp
+all: $(TARGETS)
+
+objs/$(TARGETS).o: $(TARGETS).cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -MMD -o $@
 
-%: %.o
+$(TARGETS): objs/$(TARGETS).o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
