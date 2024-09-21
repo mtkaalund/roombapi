@@ -17,6 +17,8 @@
 #include <sstream>
 #include <thread>
 
+#include <array>
+
 enum TimeFormat { LOCALTIME, UTC, UNIX, ISO_8601 };
 
 auto TimespecToTimeStr(const timespec& gpsd_time, TimeFormat time_format = LOCALTIME) {
