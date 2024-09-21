@@ -90,6 +90,9 @@ auto main() -> int {
     const auto time_str{TimespecToTimeStr(gpsd_data->fix.time, UTC)};  // you can change the 2nd argument to LOCALTIME, UTC, UNIX or ISO8601
 
     std::cout << std::setprecision(8) << std::fixed;  // set output to fixed floating point, 8 decimal precision
-    std::cout << time_str << ", " << latitude << ", " << longitude << ", " << hdop << ", " << vdop << ", " << pdop << ", " << s_vis << ", " << s_used << '\n';
+    // std::cout << time_str << ", " << latitude << ", " << longitude << ", " << hdop << ", " << vdop << ", " << pdop << ", " << s_vis << ", " << s_used << '\n';
+    std::cout << time_str << "\n\tLatitude: " << latitude << " Longitude: " << longitude << "\n";
+    std::cout << "\tHDOP: " << hdop << " VDOP: " << vdop << " PDOP: " << pdop << "\n";
+    std::cout << "\tSatellites visible: " << s_vis << " Satellites used: " << s_used << "\n";
   }
 }
