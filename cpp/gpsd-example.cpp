@@ -115,10 +115,13 @@ auto main() -> int {
     std::cout << "\tSatellites visible: " << s_vis << " Satellites used: " << s_used << "\n";
     for(int i = 0; i < s_vis; i++)
     {
+      
       std::cout << "\t\t" << gpsd_data->skyview[i].PRN << ": "
                 << gpsd_data->skyview[i].elevation << " "
                 << gpsd_data->skyview[i].azimuth << " "
                 << gpsd_data->skyview[i].ss << " "
+                << gpsd_data->skyview[i].health << " "
+                << gpsd_data->skyview[i].freqid << " "
                 << (gpsd_data->skyview[i].used ? "Y" : "N") << std::endl;
     }
   }
