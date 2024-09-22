@@ -120,30 +120,48 @@ auto main() -> int {
       std::string sat_id = "";
       switch (gpsd_data->skyview[i].gnssid)
       {
-      case 0:
+      case GNSSID_GPS:
         sat_id = "GPS";
         break;
-      case 1:
+      case GNSSID_SBAS:
         sat_id = "SBAS";
         break;
-      case 2:
+      case GNSSID_GAL:
         sat_id = "Galileo";
         break;
-      case 3:
+      case GNSSID_BD:
         sat_id = "BeiDou";
         break;
-      case 4:
+      case GNSSID_IMES:
         sat_id = "IMES";
         break;
-      case 5:
+      case GNSSID_QZSS:
         sat_id = "QZSS";
         break;
-      case 6:
+      case GNSSID_GLO:
         sat_id = "GLONASS";
         break;
-      case 7:
+      case GNSSID_IRNSS:
         sat_id = "NavIC";
         break;
+      default:
+        break;
+      }
+
+      std::string sat_str = "";
+      switch (gpsd_data->skyview[i].health)
+      {
+      case SAT_HEALTH_UNK:
+        sat_str = "Unknown";
+        break;
+
+      case SAT_HEALTH_OK:
+        sat_str = "Okay";
+        break;
+      case SAT_HEALTH_BAD:
+        sat_str = "Bad";
+        break;
+      
       default:
         break;
       }
@@ -153,7 +171,7 @@ auto main() -> int {
                 << gpsd_data->skyview[i].elevation << " "
                 << gpsd_data->skyview[i].azimuth << " "
                 << gpsd_data->skyview[i].ss << " "
-                << (int)gpsd_data->skyview[i].health << " "
+                << sat_str << " "
                 << (int)gpsd_data->skyview[i].freqid << " "
                 << sat_id << " "
                 << (gpsd_data->skyview[i].used ? "Y" : "N") << std::endl;
