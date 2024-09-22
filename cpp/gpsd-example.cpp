@@ -80,8 +80,28 @@ auto main() -> int {
       std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
+    const auto get_dop_meaning = [&](float v) {
+      std::string str;
+      if(v < 1.0f) {
+        str = "Ideal";
+      } else if(v >= 1 && v < 2) {
+        str = "Excellent";
+      } else if(v >= 2 && v < 5) {
+        str = "Good";
+      } else if(v >= 5 && v < 10 ) {
+        str = "Moderate";
+      } else if(v >= 10 && v < 20) {
+        str = "Fair";
+      } else if(v >= 20) {
+        str = "Poor";
+      }
+
+      return str;
+    };
+
     const auto latitude{gpsd_data->fix.latitude};
     const auto longitude{gpsd_data->fix.longitude};
+    const auto speed{gpsd_data->fix.speed};
     const auto hdop{gpsd_data->dop.hdop};
     const auto vdop{gpsd_data->dop.vdop};
     const auto pdop{gpsd_data->dop.pdop};
@@ -90,9 +110,8 @@ auto main() -> int {
     const auto time_str{TimespecToTimeStr(gpsd_data->fix.time, UTC)};  // you can change the 2nd argument to LOCALTIME, UTC, UNIX or ISO8601
 
     std::cout << std::setprecision(8) << std::fixed;  // set output to fixed floating point, 8 decimal precision
-    // std::cout << time_str << ", " << latitude << ", " << longitude << ", " << hdop << ", " << vdop << ", " << pdop << ", " << s_vis << ", " << s_used << '\n';
     std::cout << time_str << "\n\tLatitude: " << latitude << " Longitude: " << longitude << "\n";
-    std::cout << "\tHDOP: " << hdop << " VDOP: " << vdop << " PDOP: " << pdop << "\n";
+    std::cout << "\tHDOP: " << hdop << " " << get_dop_meaning(hdop) << " VDOP: " << vdop << " " << get_dop_meaning(vdop) << " PDOP: " << pdop << " " << get_dop_meaning(pdop) << "\n";
     std::cout << "\tSatellites visible: " << s_vis << " Satellites used: " << s_used << "\n";
     for(int i = 0; i < s_vis; i++)
     {
