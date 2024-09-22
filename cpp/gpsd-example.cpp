@@ -54,6 +54,8 @@ auto TimespecToTimeStr(const timespec& gpsd_time, TimeFormat time_format = LOCAL
 }
 
 auto main() -> int {
+
+
   gpsmm gps_rec("localhost", DEFAULT_GPSD_PORT);
 
   if (gps_rec.stream(WATCH_ENABLE | WATCH_JSON) == nullptr) {
@@ -115,13 +117,45 @@ auto main() -> int {
     std::cout << "\tSatellites visible: " << s_vis << " Satellites used: " << s_used << "\n";
     for(int i = 0; i < s_vis; i++)
     {
-      
+      std::string sat_id = "";
+      switch (gpsd_data->skyview[i].gnssid)
+      {
+      case 0:
+        sat_id = "GPS";
+        break;
+      case 1:
+        sat_id = "SBAS";
+        break;
+      case 2:
+        sat_id = "Galileo";
+        break;
+      case 3:
+        sat_id = "BeiDou";
+        break;
+      case 4:
+        sat_id = "IMES";
+        break;
+      case 5:
+        sat_id = "QZSS";
+        break;
+      case 6:
+        sat_id = "GLONASS";
+        break;
+      case 7:
+        sat_id = "NavIC";
+        break;
+      default:
+        break;
+      }
+
+
       std::cout << "\t\t" << gpsd_data->skyview[i].PRN << ": "
                 << gpsd_data->skyview[i].elevation << " "
                 << gpsd_data->skyview[i].azimuth << " "
                 << gpsd_data->skyview[i].ss << " "
                 << (int)gpsd_data->skyview[i].health << " "
                 << (int)gpsd_data->skyview[i].freqid << " "
+                << sat_id << " "
                 << (gpsd_data->skyview[i].used ? "Y" : "N") << std::endl;
     }
   }
