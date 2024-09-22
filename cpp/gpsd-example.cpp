@@ -120,8 +120,8 @@ auto main() -> int {
                 << gpsd_data->skyview[i].elevation << " "
                 << gpsd_data->skyview[i].azimuth << " "
                 << gpsd_data->skyview[i].ss << " "
-                << gpsd_data->skyview[i].health << " "
-                << gpsd_data->skyview[i].freqid << " "
+                << (int)gpsd_data->skyview[i].health << " "
+                << (int)gpsd_data->skyview[i].freqid << " "
                 << (gpsd_data->skyview[i].used ? "Y" : "N") << std::endl;
     }
   }
