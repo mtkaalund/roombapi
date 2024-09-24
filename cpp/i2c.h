@@ -41,6 +41,11 @@ public:
         }
     }
 
+    ~i2c()
+    {
+        close(i2c_file);
+    }
+
     void send(unsigned char addr, unsigned char byte)
     {
 
