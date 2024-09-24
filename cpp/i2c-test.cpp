@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cerrno>
+#include <cstring>
 // Linux specific headers
 #include <fcntl.h>
 #include <unistd.h>
@@ -22,7 +24,7 @@ auto main() -> int {
     {
         // TODO: Check errno to get what went wrong
         int err = errno;
-        std::cerr << "Failed to open the i2c bus: " << std::endl;
+        std::cerr << "Failed to open the i2c bus: " << strerror(err) << std::endl;
         return -1;
     }
 
@@ -32,7 +34,7 @@ auto main() -> int {
         // TODO: Check errno to get what went wrong
         close(file_i2c);
         int err = errno;
-        std::cerr << "Failed to acquire bus access and/or talk to slave." << std::endl;
+        std::cerr << "Failed to acquire bus access and/or talk to slave." << strerror(err) << std::endl;
         return -1;
     }
 
@@ -42,7 +44,7 @@ auto main() -> int {
         // Read
         close(file_i2c);
         int err = errno;
-        std::cerr << "Failed to read from the i2c bus." << std::endl;
+        std::cerr << "Failed to read from the i2c bus." << strerror(err) << std::endl;
         return -1;
     }
 
@@ -54,7 +56,7 @@ auto main() -> int {
     if( write(file_i2c, buffer, length) != length ) {
         close(file_i2c);
         int err = errno;
-        std::cerr << "Failed to write to the i2c bus." << std::endl;
+        std::cerr << "Failed to write to the i2c bus." << strerror(err) << std::endl;
         return -1;
     }
 
