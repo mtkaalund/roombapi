@@ -2,9 +2,37 @@
 
 #include "i2c.h"
 
-#define LCD_CLEARDISPLAY 0x01;
-#define LCD_RETURNHOME
+namespace lcd {
+enum class command {
+    clear_display   = 0x01,
+    return_home     = 0x02,
+    entry_mode_set  = 0x04,
+    display_ctrl    = 0x08,
+    cursor_shift    = 0x10,
+    function_set    = 0x20,
+    set_CGRAM_addr  = 0x40,
+    set_DRAM_addr   = 0x80
+};
 
+enum class display_entry_mode
+{
+    entry_right     = 0x00,
+    entry_left      = 0x02,
+    increment       = 0x01,
+    decrement       = 0x00
+};
+
+enum class display_control
+{
+    display_on      = 0x04,
+    display_off     = 0x00,
+    cursor_on       = 0x02,
+    cursor_off      = 0x00,
+    blink_on        = 0x01,
+    blink_off       = 0x00
+};
+
+};
 
 auto main() -> int
 {
@@ -12,56 +40,6 @@ auto main() -> int
     rpi::i2c i2c_device = rpi::i2c(1);
 
     i2c_device.send(0x27, 0x08);
-
-    // int file_i2c;
-    // int length;
-    // unsigned char buffer[60] = {0};
-
-    // // Opening i2c bus
-    // std::string filename = "/dev/i2c-1";
-    // if ((file_i2c = open(filename.c_str(), O_RDWR)) < 0)
-    // {
-    //     // TODO: Check errno to get what went wrong
-    //     int err = errno;
-    //     std::cerr << "Failed to open the i2c bus: " << strerror(err) << std::endl;
-    //     return -1;
-    // }
-
-    // int i2c_addr = 0x27;
-    // if (ioctl(file_i2c, I2C_SLAVE, i2c_addr) < 0)
-    // {
-    //     // TODO: Check errno to get what went wrong
-    //     close(file_i2c);
-    //     int err = errno;
-    //     std::cerr << "Failed to acquire bus access and/or talk to slave." << strerror(err) << std::endl;
-    //     return -1;
-    // }
-
-    // // Read bytes
-    // length = 4; // Number of bytes to read
-    // if (read(file_i2c, buffer, length) != length)
-    // {
-    //     // Read
-    //     close(file_i2c);
-    //     int err = errno;
-    //     std::cerr << "Failed to read from the i2c bus." << strerror(err) << std::endl;
-    //     return -1;
-    // }
-
-    // std::cout << "Data read: " << buffer << std::endl;
-
-    // buffer[0] = 0x01;
-    // buffer[1] = 0x02;
-    // length = 2;
-    // if (write(file_i2c, buffer, length) != length)
-    // {
-    //     close(file_i2c);
-    //     int err = errno;
-    //     std::cerr << "Failed to write to the i2c bus." << strerror(err) << std::endl;
-    //     return -1;
-    // }
-
-    // close(file_i2c);
 
     return 0;
 }
