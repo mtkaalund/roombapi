@@ -2,15 +2,16 @@
 
 #include "i2c.h"
 
+#define LCD_CLEARDISPLAY 0x01;
+#define LCD_RETURNHOME
+
+
 auto main() -> int
 {
 
     rpi::i2c i2c_device = rpi::i2c(1);
 
-    i2c_device.send(0x27, 0x01);
-    i2c_device.send(0x27, 0x02);
-    i2c_device.send(0x27, 0x04);
-    i2c_device.send(0x27, 0x12);
+    i2c_device.send(0x27, 0x08);
 
     // int file_i2c;
     // int length;
