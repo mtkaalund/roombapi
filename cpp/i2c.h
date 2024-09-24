@@ -65,16 +65,14 @@ public:
         }
     }
 
-    unsigned char * receive( unsigned char addr )
+    void receive( unsigned char addr, unsigned char * bytes, int length )
     {
-        unsigned char bytes[1] = {0};
-        if( read(this->i2c_file, bytes, 1) != 1)
+
+        if( read(this->i2c_file, bytes, length) != length)
         {
             error("Failed to read from the i2c");
-            return nullptr;
+            exit(1);
         }
-
-        return bytes;
     }
 };
 
