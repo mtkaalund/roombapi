@@ -8,6 +8,8 @@
 #include <linux/i2c-dev.h>
 #include <linux/i2c.h>
 
+// https://raspberry-projects.com/pi/programming-in-c/i2c/using-the-i2c-interface
+
 auto main() -> int {
 
     int file_i2c;
