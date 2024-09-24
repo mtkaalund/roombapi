@@ -4,7 +4,7 @@ DEPS    := $(OBJECTS:objs/%.o=%.d)
 INCLUDES:= -I.
 CXXFLAGS:= -std=c++20 -Wall -pedantic -pthread -O0 -g3 -Wextra
 LDFLAGS := -lgps -lstdc++fs -lpthread -L/usr/lib
-TARGETS := gpsd-example
+TARGETS := gpsd-example i2c-test
 
 .PHONY: clean all
 
