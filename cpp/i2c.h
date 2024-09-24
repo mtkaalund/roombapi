@@ -65,7 +65,7 @@ public:
         }
     }
 
-    void receive( unsigned char addr, unsigned char * bytes, int length )
+    void receive( unsigned char * bytes, int length )
     {
 
         if( read(this->i2c_file, bytes, length) != length)
