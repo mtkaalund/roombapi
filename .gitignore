@@ -1,3 +1,4 @@
 env
 cpp/objs/*
 cpp/gpsd-example
+cpp/i2c-test
