@@ -8,7 +8,7 @@ TARGETS := gpsd-example i2c-test
 
 .PHONY: clean all
 
-all: $(TARGETS)
+all: $(OBJECTS) $(TARGETS)
 
 objs/%.o: %.cpp
 	@mkdir -p $(@D)
