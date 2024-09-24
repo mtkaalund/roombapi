@@ -10,11 +10,11 @@ TARGETS := gpsd-example i2c-test
 
 all: $(TARGETS)
 
-objs/$(TARGETS).o: $(TARGETS).cpp
+objs/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -MMD -o $@
 
-$(TARGETS): objs/$(TARGETS).o
+%: objs/%.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
