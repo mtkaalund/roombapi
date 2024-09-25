@@ -58,6 +58,13 @@ auto main() -> int
 
     rpi::i2c i2c_device = rpi::i2c(1);
 
+    i2c_device.send(0x27, 0x00);
+
+    for(int i = 0; i < 20000; i++)
+    for(int j = 0; j < 20000; j++)
+        asm("nop");
+
+
     i2c_device.send(0x27, P3);
 
     return 0;
