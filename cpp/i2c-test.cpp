@@ -34,12 +34,31 @@ enum class display_control
 
 };
 
+
+// Pinout PCF8574 -> LCD
+// P0 = RS
+// P1 = RW
+// P2 = CS
+// P3 = P3
+// P4 = DB4
+// P5 = DB5
+// P6 = DB6
+// P7 = DB7
+#define RS (1 << 0)
+#define RW (1 << 1)
+#define CS (1 << 2)
+#define P3 (1 << 3)
+#define DB4 (1 << 4)
+#define DB5 (1 << 5)
+#define DB6 (1 << 6)
+#define DB7 (1 << 7)
+
 auto main() -> int
 {
 
     rpi::i2c i2c_device = rpi::i2c(1);
 
-    i2c_device.send(0x27, 0x08);
+    i2c_device.send(0x27, P3);
 
     return 0;
 }
