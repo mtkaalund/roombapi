@@ -99,17 +99,17 @@ auto main() -> int
 
     std::cout << "lcd start" << std::endl;
 
-    lcd_send(&i2c_device, (0x03 << 4), mode);
+    lcd_send( (0x03 << 4), mode);
     std::this_thread::sleep_for(std::chrono::microseconds(4500));
-    lcd_send(&i2c_device, (0x03 << 4), mode);
+    lcd_send((0x03 << 4), mode);
     std::this_thread::sleep_for(std::chrono::microseconds(4500));
-    lcd_send(&i2c_device, (0x03 << 4), mode);
+    lcd_send( (0x03 << 4), mode);
     std::this_thread::sleep_for(std::chrono::microseconds(150));
-    lcd_send(&i2c_device, (0x02 << 4), mode);
+    lcd_send( (0x02 << 4), mode);
     
     std::cout << "Clearing display" << std::endl;
     // clear display
-    lcd_send(&i2c_device, 0x01, 0x00);
+    lcd_send( 0x01, 0x00);
     std::this_thread::sleep_for(std::chrono::microseconds(2000));
 
     std::cout << "End of program" << std::endl;
