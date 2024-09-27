@@ -106,5 +106,10 @@ auto main() -> int
     lcd_send(i2c_device, (0x02 << 4), mode);
     
 
+    // clear display
+    lcd_send(i2c_device, 0x01, 0x00);
+    std::this_thread::sleep_for(std::chrono::microseconds(2000));
+
+
     return 0;
 }
