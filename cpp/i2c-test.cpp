@@ -76,18 +76,18 @@ auto main() -> int
     //5:      1    0   0       1       0       0      // Writes H
     //        1    0   1       0       0       0    
     //
-    auto lcd_send = [](rpi::i2c *device, uint8_t value, uint8_t mode) {
+    auto lcd_send = [&](uint8_t value, uint8_t mode) {
         uint8_t high = value & 0xF0;
         uint8_t low  = ( value << 4 ) & 0xF0;
 
         const uint8_t backlight = 0x08;
         const uint8_t enable    = 0b00000100;
 
-        device->send(0x27, high | mode | backlight);
+        i2c_device.send(0x27, high | mode | backlight);
         // enable
-        device->send(0x27, (high | mode | backlight) | enable );
+        i2c_device.send(0x27, (high | mode | backlight) | enable );
         std::this_thread::sleep_for(std::chrono::microseconds(1));
-        device->send(0x27, (low | mode | backlight) & ~enable);
+        i2c_device.send(0x27, (low | mode | backlight) & ~enable);
         std::this_thread::sleep_for(std::chrono::microseconds(50));
         // enable
     };
