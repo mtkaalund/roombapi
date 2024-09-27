@@ -61,7 +61,7 @@ auto main() -> int
 
     rpi::i2c i2c_device = rpi::i2c(1);
 
-    unsigned char c = 0x00;
+    // unsigned char c = 0x00;
 
     // This will be 4-bit operation mode
     // Setup lcd display
@@ -76,18 +76,18 @@ auto main() -> int
     //5:      1    0   0       1       0       0      // Writes H
     //        1    0   1       0       0       0    
     //
-    auto lcd_send = [](rpi::i2c &device, uint8_t value, uint8_t mode) {
+    auto lcd_send = [](rpi::i2c *device, uint8_t value, uint8_t mode) {
         uint8_t high = value & 0xF0;
         uint8_t low  = ( value << 4 ) & 0xF0;
 
         const uint8_t backlight = 0x08;
         const uint8_t enable    = 0b00000100;
 
-        device.send(0x27, high | mode | backlight);
+        device->send(0x27, high | mode | backlight);
         // enable
-        device.send(0x27, (high | mode | backlight) | enable );
+        device->send(0x27, (high | mode | backlight) | enable );
         std::this_thread::sleep_for(std::chrono::microseconds(1));
-        device.send(0x27, (low | mode | backlight) & ~enable);
+        device->send(0x27, (low | mode | backlight) & ~enable);
         std::this_thread::sleep_for(std::chrono::microseconds(50));
         // enable
     };
@@ -97,19 +97,22 @@ auto main() -> int
 
     // command is send with mode set to 0x00
 
-    lcd_send(i2c_device, (0x03 << 4), mode);
-    std::this_thread::sleep_for(std::chrono::microseconds(4500));
-    lcd_send(i2c_device, (0x03 << 4), mode);
-    std::this_thread::sleep_for(std::chrono::microseconds(4500));
-    lcd_send(i2c_device, (0x03 << 4), mode);
-    std::this_thread::sleep_for(std::chrono::microseconds(150));
-    lcd_send(i2c_device, (0x02 << 4), mode);
-    
+    std::cout << "lcd start" << std::endl;
 
+    lcd_send(&i2c_device, (0x03 << 4), mode);
+    std::this_thread::sleep_for(std::chrono::microseconds(4500));
+    lcd_send(&i2c_device, (0x03 << 4), mode);
+    std::this_thread::sleep_for(std::chrono::microseconds(4500));
+    lcd_send(&i2c_device, (0x03 << 4), mode);
+    std::this_thread::sleep_for(std::chrono::microseconds(150));
+    lcd_send(&i2c_device, (0x02 << 4), mode);
+    
+    std::cout << "Clearing display" << std::endl;
     // clear display
-    lcd_send(i2c_device, 0x01, 0x00);
+    lcd_send(&i2c_device, 0x01, 0x00);
     std::this_thread::sleep_for(std::chrono::microseconds(2000));
 
+    std::cout << "End of program" << std::endl;
 
     return 0;
 }
