@@ -76,7 +76,7 @@ auto main() -> int
     //5:      1    0   0       1       0       0      // Writes H
     //        1    0   1       0       0       0    
     //
-    auto lcd_send = [](rpi::i2c device, uint8_t value, uint8_t mode) {
+    auto lcd_send = [](rpi::i2c &device, uint8_t value, uint8_t mode) {
         uint8_t high = value & 0xF0;
         uint8_t low  = ( value << 4 ) & 0xF0;
 
