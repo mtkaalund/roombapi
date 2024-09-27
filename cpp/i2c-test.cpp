@@ -92,7 +92,10 @@ auto main() -> int
         // enable
     };
 
-    const uint8_t mode = 0x00;
+    const uint8_t rs = 0x01;
+    uint8_t mode = rs;
+
+    // command is send with mode set to 0x00
 
     lcd_send(i2c_device, (0x03 << 4), mode);
     std::this_thread::sleep_for(std::chrono::microseconds(4500));
