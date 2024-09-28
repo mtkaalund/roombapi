@@ -148,6 +148,17 @@ auto main() -> int
     lcd_init();
 
     lcd_char('h');
+    lcd_char('e');
+    lcd_char('l');
+    lcd_char('l');
+    lcd_char('o');
+    lcd_char(',');
+    lcd_char(' ');
+    lcd_char('w');
+    lcd_char('o');
+    lcd_char('r');
+    lcd_char('l');
+    lcd_char('d');
 
     std::cout << "End of program" << std::endl;
 
