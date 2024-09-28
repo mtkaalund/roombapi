@@ -81,6 +81,13 @@ auto main() -> int
     const uint8_t backlight = 0x08;
     const uint8_t enable = 0b00000100;
 
+    const uint8_t lcd_functionset = 0x20;
+    const uint8_t lcd_4bitmode = 0x00;
+    const uint8_t lcd_2line = 0x08;
+    const uint8_t lcd_char5x8dots = 0x00;
+
+    const uint8_t second_line = 0x40;
+
     const uint8_t rs = 0x01;
     uint8_t mode = rs;
 
@@ -105,14 +112,15 @@ auto main() -> int
         lcd_nibble(low | mode | backlight);
     };
 
-    auto lcd_cmd = [&](uint8_t c) {
+    auto lcd_instruction = [&](uint8_t c)
+    {
         lcd_send(c, 0x00);
     };
 
     auto lcd_clear = [&]()
     {
         // clear display
-        lcd_cmd(0x01);
+        lcd_instruction(0x01);
         std::this_thread::sleep_for(std::chrono::microseconds(2000));
     };
 
@@ -127,26 +135,29 @@ auto main() -> int
         lcd_send((0x02 << 4), mode);
 
         // Setting up the display
-        const uint8_t lcd_functionset = 0x20;
-        const uint8_t lcd_4bitmode = 0x00;
-        const uint8_t lcd_2line = 0x08;
-        const uint8_t lcd_char5x8dots = 0x00;
-
         uint8_t lcd_functions = lcd_4bitmode | lcd_2line | lcd_char5x8dots;
-        lcd_cmd(lcd_functionset | lcd_functionset);
+        lcd_instruction(lcd_functionset | lcd_functionset);
 
         // Clearing display
         lcd_clear();
     };
 
-    auto lcd_char = [&](const uint8_t c) {
+    auto lcd_char = [&](const uint8_t c)
+    {
         lcd_send(c, rs);
     };
 
-    auto lcd_string = [&](const std::string str) {
-        for(auto c : str) {
+    auto lcd_string = [&](const std::string str)
+    {
+        for (auto c : str)
+        {
             lcd_char(c);
         }
+    };
+
+    auto lcd_returnhome = [&]()
+    {
+        lcd_instruction(0x02);
     };
 
     // command is send with mode set to 0x00
@@ -155,18 +166,7 @@ auto main() -> int
 
     lcd_string("Hello, world!");
 
-    // lcd_char('h');
-    // lcd_char('e');
-    // lcd_char('l');
-    // lcd_char('l');
-    // lcd_char('o');
-    // lcd_char(',');
-    // lcd_char(' ');
-    // lcd_char('w');
-    // lcd_char('o');
-    // lcd_char('r');
-    // lcd_char('l');
-    // lcd_char('d');
+    lcd_returnhome();
 
     std::cout << "End of program" << std::endl;
 
