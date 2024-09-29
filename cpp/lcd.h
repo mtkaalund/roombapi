@@ -49,7 +49,7 @@ namespace rpi
         bool bEnableBacklight = true;
 
     protected:
-        lcd_i2c(const int i2c_bus = 1, const int bus_id) : BusId(bus_id)
+        lcd_i2c(const int i2c_bus = 1, const int bus_id = 0x27) : BusId(bus_id)
         {
             device = std::make_unique<rpi::i2c>(i2c_bus);
             Initialize();
